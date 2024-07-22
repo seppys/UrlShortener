@@ -8,4 +8,8 @@ public interface IUrlRepository extends CrudRepository<Url, Long>
 {
     Url findById(long id);
     List<Url> findAll();
+    Url findByLongUrl(String longURl);
+    boolean existsByLongUrl(String longUrl);
+    boolean existsByUrlKey(String urlKey);
+
 }
