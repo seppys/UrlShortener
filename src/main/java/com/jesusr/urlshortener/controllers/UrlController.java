@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.util.List;
@@ -58,6 +59,19 @@ public class UrlController
         List<Url> mostClicked = urlService.getAllOrderByClickCounter();
         model.addAttribute("mostClicked", mostClicked);
         return "mostClicked";
+    }
+
+    @GetMapping("/{key}")
+    public String redirectTo(@PathVariable String key)
+    {
+        Url url = urlService.getByUrlKey(key);
+
+        if(url == null)
+        {
+            return "errorView";
+        }
+
+        return "redirect:" + url.getLongUrl();
     }
 
 }

@@ -43,6 +43,14 @@ public class UrlService implements IUrlService
         return urlRepository.findByLongUrl(longUrl);
     }
 
+    public Url getByUrlKey(String urlKey)
+    {
+        Url url = urlRepository.findByUrlKey(urlKey);
+        url.setClickCounter(url.getClickCounter() + 1);
+        urlRepository.save(url);
+        return url;
+    }
+
     public Url createUrl(UrlDto urlDto)
     {
         String key = generateKey();
@@ -56,6 +64,7 @@ public class UrlService implements IUrlService
         urlRepository.save(newUrl);
         return newUrl;
     }
+
 
     public Boolean existsUrl(String longUrl)
     {
