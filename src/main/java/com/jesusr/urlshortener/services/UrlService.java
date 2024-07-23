@@ -45,10 +45,14 @@ public class UrlService implements IUrlService
 
     public Url getByUrlKey(String urlKey)
     {
-        Url url = urlRepository.findByUrlKey(urlKey);
-        url.setClickCounter(url.getClickCounter() + 1);
-        urlRepository.save(url);
-        return url;
+        if(existsKey(urlKey))
+        {
+            Url url = urlRepository.findByUrlKey(urlKey);
+            url.setClickCounter(url.getClickCounter() + 1);
+            urlRepository.save(url);
+            return url;
+        }
+        return null;
     }
 
     public Url createUrl(UrlDto urlDto)
