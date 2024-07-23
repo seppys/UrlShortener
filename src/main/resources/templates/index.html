@@ -27,7 +27,7 @@
 </div>
 
 <div th:if="${urlObject}" class="container d-flex justify-content-center">
-    <table class="table w-25">
+    <table class="table w-50">
         <tr>
             <td colspan="2"><a class="link-info" th:href="${urlObject.getLongUrl()}" target="_blank" th:text="${urlObject.getLongUrl().length() > 255 ? urlObject.getLongUrl().substring(0,200) + '...' : urlObject.getLongUrl()}"></a></td>
         </tr>
