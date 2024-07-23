@@ -13,7 +13,7 @@ public class Url
     @GeneratedValue
     private Long id;
 
-    @Column(name="long_url")
+    @Column(name="long_url", columnDefinition="TEXT")
     @URL
     private String longUrl;
 

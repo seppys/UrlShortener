@@ -24,7 +24,7 @@
         </thead>
         <tbody>
             <tr th:each="url: ${mostClicked}">
-                <td><a class="link-info" th:href="${url.getLongUrl()}" target="_blank" th:text="${url.getLongUrl()}"></a></td>
+                <td><a class="link-info" th:href="${url.getLongUrl()}" target="_blank" th:text="${url.getLongUrl().length() > 255 ? url.getLongUrl().substring(0,200) + '...' : url.getLongUrl()}"></a></td>
                 <td><a class="link-info" target="_blank" th:href="${rootUri} + '/' + ${url.getUrlKey()}" th:text="${rootUri} + '/' + ${url.getUrlKey()}"></a></td>
                 <td class="text-center" th:text="${url.getClickCounter()}"></td>
             </tr>
