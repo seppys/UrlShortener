@@ -56,8 +56,11 @@ public class UrlController
     @GetMapping("/mostClicked")
     public String getMostClicked(Model model)
     {
+        String rootUri = ServletUriComponentsBuilder.fromCurrentContextPath().replacePath(null).build().toUriString();
+
         List<Url> mostClicked = urlService.getAllOrderByClickCounter();
         model.addAttribute("mostClicked", mostClicked);
+        model.addAttribute("rootUri", rootUri);
         return "mostClicked";
     }
 
