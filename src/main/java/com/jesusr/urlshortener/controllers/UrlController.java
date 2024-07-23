@@ -59,7 +59,9 @@ public class UrlController
         String rootUri = ServletUriComponentsBuilder.fromCurrentContextPath().replacePath(null).build().toUriString();
 
         List<Url> mostClicked = urlService.getAllOrderByClickCounter();
-        model.addAttribute("mostClicked", mostClicked);
+        List<Url> top10Clicked = mostClicked.size() > 10 ? mostClicked.subList(0, 10) : mostClicked;
+
+        model.addAttribute("mostClicked", top10Clicked);
         model.addAttribute("rootUri", rootUri);
         return "mostClicked";
     }
