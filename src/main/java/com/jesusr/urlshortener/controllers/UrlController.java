@@ -71,7 +71,7 @@ public class UrlController
 
         if(url == null)
         {
-            return "errorView";
+            return "error";
         }
 
         return "redirect:" + url.getLongUrl();
