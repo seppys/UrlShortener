@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Url Shortener</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bootstrap/icons/font/bootstrap-icons.min.css">
+</head>
+<body>
+
+<header th:replace="fragments.html :: header"></header>
+
+<div class="container text-center my-5">
+
+    <h1 class="display-4">URL SHORTENER</h1>
+
+    <div class="my-5">
+        <form method="post" action="/" th:object="${urlDto}">
+            <div class="form-group my-3">
+                <label for="inputUrl" class="form-check-label h2">Insert a URL:</label>
+                <input th:classappend="${errorMsg} ? 'border-2 border-danger'" type="text" class="form-control" id="inputUrl" th:field="*{longUrl}" placeholder="https://example.com">
+                <div th:if="${errorMsg}" th:text="${errorMsg}" class="alert alert-danger my-2 " role="alert"></div>
+            </div>
+            <button type="submit" class="btn btn-primary col-4">SHORT</button>
+        </form>
+    </div>
+</div>
+
+<div th:if="${urlObject}" class="container d-flex justify-content-center">
+    <table class="table w-25">
+        <tr>
+            <td colspan="2"><a class="link-info" th:href="${urlObject.getLongUrl()}" target="_blank" th:text="${urlObject.getLongUrl()}"></a></td>
+        </tr>
+        <tr>
+            <td><a id="shortened-url" class="link-info" target="_blank" th:href="${currentUri} + '/' + ${urlObject.getUrlKey()}" th:text="${currentUri} + '/' + ${urlObject.getUrlKey()}"></a></td>
+            <td class="text-center"><button id="button-copy" onclick="copyUrl()" class="bi bi-clipboard" style="font-size: 1.5em"></button></td>
+        </tr>
+    </table>
+</div>
+
+<footer th:replace="fragments.html :: footer"></footer>
+
+<script>
+    const copyUrl = () =>
+    {
+        let url = document.getElementById("shortened-url").textContent;
+        navigator.clipboard.writeText(url);
+
+        let buttonCopy = document.getElementById("button-copy");
+        buttonCopy.className = "bi bi-clipboard-check";
+    }
+</script>
+
+</body>
+</html>
