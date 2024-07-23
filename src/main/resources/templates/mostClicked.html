@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Most Clicked - Url Shortener</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bootstrap/icons/font/bootstrap-icons.min.css">
+</head>
+<body>
+
+<header th:replace="fragments.html :: header"></header>
+
+<div class="container d-flex flex-column justify-content-center align-items-center my-5">
+
+    <h1 class="display-4 m-3">MOST CLICKED URL'S</h1>
+
+    <table class="table table-hover my-3 align-items-center">
+        <thead class="table-dark">
+            <tr class="align-middle">
+                <th>Original URL</th>
+                <th>Shorted URL</th>
+                <th>Clicks count</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="url: ${mostClicked}">
+                <td><a class="link-info" th:href="${url.getLongUrl()}" target="_blank" th:text="${url.getLongUrl()}"></a></td>
+                <td><a class="link-info" target="_blank" th:href="${rootUri} + '/' + ${url.getUrlKey()}" th:text="${rootUri} + '/' + ${url.getUrlKey()}"></a></td>
+                <td class="text-center" th:text="${url.getClickCounter()}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<footer th:replace="fragments.html :: footer"></footer>
+
+</body>
+</html>
